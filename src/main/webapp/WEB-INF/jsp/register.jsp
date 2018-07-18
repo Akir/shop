@@ -19,7 +19,7 @@
 			
 			<div>
 				<form:label path="password">密 码:</form:label>
-				<form:input path="password"/>
+				<form:password path="password"/>
 				<form:errors path="password" cssClass="form-errors"/>
 			</div>
 			<div>
