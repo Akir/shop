@@ -1,0 +1,31 @@
+package shop.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import shop.model.Username;
+import shop.service.UsernameService;
+
+@Controller
+public class UsernameController {
+	private UsernameService usernameService;
+
+	@Autowired
+	public UsernameController(UsernameService usernameService) {
+		this.usernameService = usernameService;
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "/register")
+	public String registerPage() {
+		return "register";
+	}
+	
+	@RequestMapping(method = RequestMethod.POST, value = "/register")
+	public String register(Username username, Model model) {
+		usernameService.create(username);
+		return "redirect:/";
+	}
+}
