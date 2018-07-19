@@ -8,6 +8,22 @@
 		insert into USERNAME(USERNAME_ID, USERNAME_NAME, USERNAME_PASSWORD)
 		values(seq_username.nextval, #{username}, #{password})
 	</insert>
+	
+	<select id="findOneByUsername" resultMap="Username">
+		select * from USERNAME where USERNAME_NAME = #{username}
+	</select>
+	
+	<update id="updateDate">
+		update USERNAME set USERNAME_DATE = #{date}
+		where USERNAME_NAME = #{username}
+	</update>
+	
+	<resultMap type="shop.model.Username" id="Username">
+		<id column="USERNAME_ID" property="id"/>
+		<result column="USERNAME_NAME" property="username"/>
+		<result column="USERNAME_PASSWORD" property="password"/>
+		<result column="USERNAME_DATE" property="date"/>
+	</resultMap>
 </mapper>
 
 

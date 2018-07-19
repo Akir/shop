@@ -24,4 +24,8 @@ public class UsernameServiceImpl implements UsernameService {
 		usernameMapper.create(username);
 	}
 
+	public Username findUserByName(String username) {
+		return usernameMapper.findOneByUsername(username);
+	}
+
 }

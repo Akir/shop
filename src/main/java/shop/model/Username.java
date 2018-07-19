@@ -1,5 +1,6 @@
 package shop.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.validation.constraints.Pattern;
@@ -37,5 +38,9 @@ public class Username {
 	}
 	public void setDate(Date date) {
 		this.date = date;
+	}
+	public String getDateFormat() {
+		SimpleDateFormat sf = new SimpleDateFormat("yyyy年MM月dd日 HH时mm分ss秒");
+		return sf.format(date);
 	}
 }

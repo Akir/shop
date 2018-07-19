@@ -35,4 +35,10 @@ public class UsernameController {
 		usernameService.create(username);
 		return "redirect:/";
 	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "/login")
+	public String loginPage() {
+		return "login";
+	}
+	
 }

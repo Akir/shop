@@ -4,6 +4,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ attribute name="title" required="true"%>
 <%@ attribute name="css" fragment="true" %>
+<sec:authentication property="principal" var="username"/>
 <c:set var="contextPath" value="${pageContext.request.contextPath }"></c:set>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -19,6 +20,18 @@
 			<ul>
 				<li><a href="${contextPath }/">[首页]</a></li>
 			</ul>
+			<c:if test="${username == 'anonymousUser' }">
+				<a href="${contextPath }/register">[注册] </a>
+				<a href="${contextPath }/login">[登录]</a>
+			</c:if>
+			<c:if test="${username != 'anonymousUser' }">
+				<span>${username.username } </span>
+				<span>上次登录时间:${username.userName.dateFormat }</span>
+				<form action="${contextPath }/logout" method="post" style="display: inline-block;">
+					<sec:csrfInput/>
+					<input type="submit" value="[退出]" style="background-color: transparent; border: none;">
+				</form>
+			</c:if>
 		</div>
 	</div>
 

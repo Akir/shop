@@ -6,4 +6,8 @@ public interface UsernameMapper {
 
 	void create(Username username);
 
+	Username findOneByUsername(String username);
+
+	void updateDate(Username username);
+
 }
