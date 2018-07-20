@@ -18,6 +18,11 @@
 		where USERNAME_NAME = #{username}
 	</update>
 	
+	<select id="existUsername" resultType="boolean">
+		select count(*) from USERNAME
+		where USERNAME_NAME = #{username}
+	</select>
+	
 	<resultMap type="shop.model.Username" id="Username">
 		<id column="USERNAME_ID" property="id"/>
 		<result column="USERNAME_NAME" property="username"/>

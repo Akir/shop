@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import shop.model.Username;
 import shop.service.UsernameService;
+import shop.service.exception.UsernameExistException;
 
 @Controller
 public class UsernameController {
@@ -32,7 +33,13 @@ public class UsernameController {
 		if(bindingResult.hasErrors()){
 			return "register";
 		}
-		usernameService.create(username);
+		try {
+			usernameService.create(username);
+		}catch (UsernameExistException e) {
+			System.out.println(e.getMessage());
+			bindingResult.rejectValue("username", "0", "用户名已存在");
+			return "register";
+		}
 		return "redirect:/";
 	}
 	

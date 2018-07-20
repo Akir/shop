@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import shop.mapper.UsernameMapper;
 import shop.model.Username;
+import shop.service.exception.UsernameExistException;
 
 @Service
 public class UsernameServiceImpl implements UsernameService {
@@ -19,6 +20,9 @@ public class UsernameServiceImpl implements UsernameService {
 	}
 
 	public void create(Username username) {
+		if(usernameMapper.existUsername(username.getUsername())) {
+			throw new UsernameExistException();
+		}
 		String encodedPassword = passwordEncoder.encode(username.getPassword());
 		username.setPassword(encodedPassword);
 		usernameMapper.create(username);

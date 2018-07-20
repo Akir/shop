@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="shop.mapper.CellPhoneMapper">
+	<select id="findAllByCondition" resultMap="CellPhone">
+		select * from CELLPHONE c
+		inner join BRAND b on b.BRAND_ID = c.BRAND_ID
+		<where>
+			<if test="model != ''">
+				CELLPHONE_MODEL = #{model}
+			</if>
+			<if test="os != ''">
+				and CELLPHONE_OS = #{os}
+			</if>
+			<if test="cpu != ''">
+				and CELLPHONE_CPU = #{cpu}
+			</if>
+			<if test="ram != 0">
+				and CELLPHONE_RAM = #{ram}
+			</if>
+			<if test="storage != 0">
+				and CELLPHONE_STORAGE = #{storage}
+			</if>
+			<if test="brand.id != 0">
+				and c.BRAND_ID = #{brand.id}
+			</if>
+		</where>
+	</select>
+	
+	<select id="findOne" resultMap="CellPhone">
+		select * from CELLPHONE c
+		inner join BRAND b on b.BRAND_ID = c.BRAND_ID
+		where CELLPHONE_ID = #{id}
+	</select>
+	
+	<resultMap type="shop.model.CellPhone" id="CellPhone">
+		<id column="CELLPHONE_ID" property="id"/>
+		<result column="CELLPHONE_MODEL" property="model"/>
+		<result column="CELLPHONE_OS" property="os"/>
+		<result column="CELLPHONE_CPU" property="cpu"/>
+		<result column="CELLPHONE_ram" property="ram"/>
+		<result column="CELLPHONE_storage" property="storage"/>
+		<result column="CELLPHONE_color" property="color"/>
+		<result column="CELLPHONE_price" property="price"/>
+		<result column="CELLPHONE_DESCRIPTION" property="description"/>
+		<association property="brand" javaType="shop.model.Brand">
+			<id column="BRAND_ID" property="id"/>
+			<result column="BRAND_NAME" property="name"/>
+			<result column="BRAND_DESCRIPTION" property="description"/>
+		</association>
+	</resultMap>
+</mapper>
+
+
+
+
+
+
+
+
+

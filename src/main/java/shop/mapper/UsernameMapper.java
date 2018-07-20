@@ -9,5 +9,7 @@ public interface UsernameMapper {
 	Username findOneByUsername(String username);
 
 	void updateDate(Username username);
+	
+	boolean existUsername(String username);
 
 }

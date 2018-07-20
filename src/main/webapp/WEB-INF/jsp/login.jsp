@@ -12,6 +12,9 @@
 			<c:if test="${param.error != null }">
 				<span>用户名或密码错误</span>
 			</c:if>
+			<c:if test="${param.logout != null }">
+				<span>账号已登出，请重新登录</span>
+			</c:if>
 			<div>
 				<label for="username">用户名:</label>
 				<input type="text" name="username" id="username"/>
