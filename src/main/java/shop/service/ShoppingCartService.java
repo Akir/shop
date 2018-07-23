@@ -8,4 +8,6 @@ public interface ShoppingCartService {
 
 	ShoppingCart findShoppingCart(long id);
 
+	void operateShoppingCart(String operate, long id, int quantity);
+
 }

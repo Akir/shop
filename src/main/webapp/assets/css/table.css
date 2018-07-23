@@ -1,0 +1,6 @@
+@charset "UTF-8";
+
+.table tr td{
+	text-align: center;
+	padding: 12px 24px;
+}

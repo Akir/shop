@@ -11,8 +11,24 @@
 		where u.username_id = #{id}
 	</select>
 	
+	<update id="reduceQuantity">
+		update SHOPPINGCART set QUANTITY = QUANTITY - 1
+		where USERNAME_ID = #{username_id} and CELLPHONE_ID = #{cellphone_id}
+	</update>
+	
+	<update id="increaseQuantity">
+		update SHOPPINGCART set QUANTITY = QUANTITY + 1
+		where USERNAME_ID = #{username_id} and CELLPHONE_ID = #{cellphone_id}
+	</update>
+	
+	<delete id="deleteShoppingCartItem">
+		delete from SHOPPINGCART
+		where USERNAME_ID = #{username_id} and CELLPHONE_ID = #{cellphone_id}
+	</delete>
+	
 	<resultMap type="shop.model.ShoppingCartItem" id="ShoppingCartItem">
-		<result property="quantity" column="quantity"/>
+		<id column="CELLPHONE_ID"/>
+		<result property="quantity" column="QUANTITY"/>
 		<association property="cellPhone" javaType="shop.model.CellPhone">
 			<id column="CELLPHONE_ID" property="id"/>
 			<result column="CELLPHONE_MODEL" property="model"/>
