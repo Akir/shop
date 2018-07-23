@@ -3,7 +3,6 @@ package shop.service;
 import java.util.List;
 
 import shop.model.CellPhone;
-import shop.model.ShoppingCartItem;
 
 public interface CellPhoneService {
 
@@ -16,7 +15,5 @@ public interface CellPhoneService {
 	void addQuantity(long username_id, long cellphone_id);
 
 	void createShoppingCart(long username_id, long cellphone_id);
-
-	List<ShoppingCartItem> findShoppingCart(long id);
 
 }

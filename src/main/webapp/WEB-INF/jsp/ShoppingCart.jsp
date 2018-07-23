@@ -14,11 +14,11 @@
 				<th>价格</th>
 				<th>数量</th>
 			</tr>
-			<c:forEach items="${ShoppingCart }" var="CellPhone">
+			<c:forEach items="${ShoppingCart.shoppingCartItems }" var="shoppingCartItem">
 				<tr>
-					<td>${CellPhone.cellPhone.model }</td>
-					<td>${CellPhone.cellPhone.price/100 }</td>
-					<td>${CellPhone.quantity }</td>
+					<td>${shoppingCartItem.cellPhone.model }</td>
+					<td>${shoppingCartItem.cellPhone.price/100 }</td>
+					<td>${shoppingCartItem.quantity }</td>
 				</tr>
 			</c:forEach>
 		</table>

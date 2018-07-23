@@ -3,20 +3,18 @@ package shop.service;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import shop.mapper.CellPhoneMapper;
-import shop.mapper.ShoppingCartMapper;
 import shop.model.CellPhone;
-import shop.model.ShoppingCartItem;
 
 @Service
+@Transactional
 public class CellPhoneServiceImpl implements CellPhoneService {
 	private CellPhoneMapper cellPhoneMapper;
-	private ShoppingCartMapper shoppingCartMapper;
 
-	public CellPhoneServiceImpl(CellPhoneMapper cellPhoneMapper, ShoppingCartMapper shoppingCartMapper) {
+	public CellPhoneServiceImpl(CellPhoneMapper cellPhoneMapper) {
 		this.cellPhoneMapper = cellPhoneMapper;
-		this.shoppingCartMapper = shoppingCartMapper;
 	}
 
 	public List<CellPhone> findAllByCondition(CellPhone cellPhone) {
@@ -39,7 +37,4 @@ public class CellPhoneServiceImpl implements CellPhoneService {
 		cellPhoneMapper.createShoppingCart(username_id, cellphone_id);
 	}
 
-	public List<ShoppingCartItem> findShoppingCart(long id) {
-		return shoppingCartMapper.findShoppingCart(id);
-	}
 }
