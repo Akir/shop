@@ -35,6 +35,22 @@
 		where CELLPHONE_ID = #{id}
 	</select>
 	
+	<select id="shoppingCartExistGoods" resultType="boolean">
+		select count(*) from CELLPHONE c
+		inner join SHOPPINGCART sc on sc.CELLPHONE_ID = c.CELLPHONE_ID
+		inner join USERNAME u on u.USERNAME_ID = sc.USERNAME_ID
+		where sc.USERNAME_ID = #{username_id} and sc.CELLPHONE_ID = #{cellphone_id}
+	</select>
+	
+	<update id="addQuantity">
+		update SHOPPINGCART set quantity = quantity + 1
+		where USERNAME_ID = #{username_id} and CELLPHONE_ID = #{cellphone_id}
+	</update>
+	
+	<insert id="createShoppingCart">
+		insert into SHOPPINGCART values(#{username_id}, #{cellphone_id}, 1)
+	</insert>
+	
 	<resultMap type="shop.model.CellPhone" id="CellPhone">
 		<id column="CELLPHONE_ID" property="id"/>
 		<result column="CELLPHONE_MODEL" property="model"/>

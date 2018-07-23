@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="shop.mapper.ShoppingCartMapper">
+	<select id="findShoppingCart" resultMap="ShoppingCartItem">
+		select * from  USERNAME u
+		inner join SHOPPINGCART sc on sc.USERNAME_ID = u.USERNAME_ID
+		inner join CELLPHONE c on c.CELLPHONE_ID = sc.CELLPHONE_ID
+		where u.username_id = #{id}
+	</select>
+	
+	<resultMap type="shop.model.ShoppingCartItem" id="ShoppingCartItem">
+		<result property="quantity" column="quantity"/>
+		<association property="cellPhone" javaType="shop.model.CellPhone">
+			<id column="CELLPHONE_ID" property="id"/>
+			<result column="CELLPHONE_MODEL" property="model"/>
+			<result column="CELLPHONE_OS" property="os"/>
+			<result column="CELLPHONE_CPU" property="cpu"/>
+			<result column="CELLPHONE_ram" property="ram"/>
+			<result column="CELLPHONE_storage" property="storage"/>
+			<result column="CELLPHONE_color" property="color"/>
+			<result column="CELLPHONE_price" property="price"/>
+			<result column="CELLPHONE_DESCRIPTION" property="description"/>
+			<association property="brand" javaType="shop.model.Brand">
+				<id column="BRAND_ID" property="id"/>
+				<result column="BRAND_NAME" property="name"/>
+				<result column="BRAND_DESCRIPTION" property="description"/>
+			</association>
+		</association>
+	</resultMap>
+</mapper>
+
+
+
+
+
+
+

@@ -8,18 +8,18 @@ import shop.model.Username;
 
 public class UserDetailsImpl extends User {
 
-	private Username username;
+	private Username user;
 	
 	public UserDetailsImpl(Username username) {
 		super(username.getUsername(), 
 				username.getPassword(), 
 				true, true, true, true, 
 				new ArrayList<GrantedAuthority>());
-		this.username = username;
+		this.user = username;
 	}
 
-	public Username getUserName() {
-		return username;
+	public Username getUser() {
+		return user;
 	}
-	
+
 }

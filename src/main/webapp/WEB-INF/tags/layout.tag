@@ -26,12 +26,13 @@
 			</c:if>
 			<c:if test="${username != 'anonymousUser' }">
 				<span>${username.username } </span>
-				<span>上次登录时间:${username.userName.dateFormat }</span>
+				<span>上次登录时间:${username.user.dateFormat }</span>
 				<form action="${contextPath }/logout" method="post" style="display: inline-block;">
 					<sec:csrfInput/>
 					<input type="submit" value="[退出]" style="background-color: transparent; border: none;">
 				</form>
 			</c:if>
+			<a href="${contextPath }/uc/ShoppingCart">购物车</a>
 		</div>
 	</div>
 
