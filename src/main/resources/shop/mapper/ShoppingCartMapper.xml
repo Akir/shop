@@ -9,6 +9,7 @@
 		inner join SHOPPINGCART sc on sc.USERNAME_ID = u.USERNAME_ID
 		inner join CELLPHONE c on c.CELLPHONE_ID = sc.CELLPHONE_ID
 		where u.username_id = #{id}
+		order by sc.CELLPHONE_ID
 	</select>
 	
 	<update id="reduceQuantity">
