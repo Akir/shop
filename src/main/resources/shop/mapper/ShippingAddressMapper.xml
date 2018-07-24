@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="shop.mapper.ShippingAddressMapper">
+	<select id="findAll" resultType="shop.model.ShippingAddress">
+		select * from SHIPPINGADDRESS
+	</select>
+	
+	<insert id="create" useGeneratedKeys="true" keyColumn="SHIPPINGADDRESS_ID" keyProperty="id">
+		insert into SHIPPINGADDRESS values(seq_shippingaddress.nextval,
+		#{username.id}, #{name}, #{phoneNumber}, #{address})
+	</insert>
+	
+	<delete id="delete">
+		delete from SHIPPINGADDRESS where SHIPPINGADDRESS_ID = #{id}
+	</delete>
+	
+	<update id="update">
+		update SHIPPINGADDRESS set CONSIGNEE_NAME = #{name},
+		PHONE_NUMBER = #{phoneNumber}, ADDRESS = #{address}
+		where SHIPPINGADDRESS_ID = #{id}
+	</update>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
