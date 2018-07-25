@@ -34,6 +34,7 @@
 				</form>
 			</c:if>
 			<a href="${contextPath }/uc/ShoppingCart">购物车</a>
+			<a href="${contextPath }/uc/shippingAddress">收货人管理</a>
 		</div>
 	</div>
 

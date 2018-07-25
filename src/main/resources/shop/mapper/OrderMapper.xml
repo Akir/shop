@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="shop.mapper.OrderMapper">
+	<insert id="create" useGeneratedKeys="true" keyColumn="ORDER_ID" keyProperty="id">
+		insert into "ORDER" values(seq_order.nextval, #{username.id},
+		#{shippingAddress.id}, #{date})
+	</insert>
+	
+	<select id="findAll" resultMap="Order">
+		select * from "ORDER" o
+		inner join SHIPPINGADDRESS sa on sa.SHIPPINGADDRESS_ID = o.SHIPPINGADDRESS_ID
+	</select>
+	
+	<resultMap type="shop.model.Order" id="Order">
+		<id column="ORDER_ID" property="id"/>
+		<result column="ORDER_TIME" property="date"/>
+		<association property="username" javaType="shop.model.Username">
+			<id column="USERNAME_ID" property="id"/>
+		</association>
+		<association property="shippingAddress" javaType="shop.model.ShippingAddress">
+			<id column="SHIPPINGADDRESS_ID" property="id"/>
+			<result column="CONSIGNEE_NAME" property="name"/>
+			<result column="PHONE_NUMBER" property="phoneNumber"/>
+			<result column="ADDRESS" property="address"/>
+		</association>
+	</resultMap>
+</mapper>
+
+
+
+
+

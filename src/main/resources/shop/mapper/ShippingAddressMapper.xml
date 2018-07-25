@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="shop.mapper.ShippingAddressMapper">
-	<select id="findAll" resultType="shop.model.ShippingAddress">
+	<select id="findAll" resultMap="ShippingAddress">
 		select * from SHIPPINGADDRESS
 	</select>
 	
@@ -22,6 +22,22 @@
 		PHONE_NUMBER = #{phoneNumber}, ADDRESS = #{address}
 		where SHIPPINGADDRESS_ID = #{id}
 	</update>
+	
+	<select id="findOne" resultMap="ShippingAddress">
+		select * from SHIPPINGADDRESS
+		where SHIPPINGADDRESS_ID = #{id}
+	</select>
+	
+	<resultMap type="shop.model.ShippingAddress" id="ShippingAddress">
+		<id column="SHIPPINGADDRESS_ID" property="id"/>
+		<result column="CONSIGNEE_NAME" property="name"/>
+		<result column="PHONE_NUMBER" property="phoneNumber"/>
+		<result column="ADDRESS" property="address"/>
+		<association property="username" javaType="shop.model.Username">
+			<id column="USERNAME_ID" property="id"/>
+			<result column="USERNAME_NAME" property="username"/>
+		</association>
+	</resultMap>
 </mapper>
 
 

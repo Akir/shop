@@ -12,4 +12,6 @@ public interface ShippingAddressMapper {
 	void delete(Long id);
 	
 	void update(ShippingAddress shippingAddress);
+
+	ShippingAddress findOne(Long id);
 }

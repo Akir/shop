@@ -39,7 +39,12 @@
 					</tr>
 				</c:forEach>
 				<tr>
-					<td colspan="4">总计:${shoppingCart.totalAmount/100 }</td>
+					<td colspan="3">总计:${shoppingCart.totalAmount/100 }</td>
+					<td>
+						<form action="${contextPath}/uc/order/add" method="get">
+							<button>结算</button>
+						</form>
+					</td>
 				</tr>
 			</c:if>
 			

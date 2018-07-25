@@ -23,18 +23,23 @@
 			<c:if test="${shippingAddresses[0] != null }">
 				<tr>
 					<th>收货人姓名</th>
-					<th>手机号</th>
+					<th>手机号码</th>
 					<th>详细地址</th>
+					<th>选项</th>
 				</tr>
 				<c:forEach items="${shippingAddresses }" var="shippingAddress">
 					<tr>
 						<td>${shippingAddress.name }</td>
 						<td>${shippingAddress.phoneNumber }</td>
 						<td>${shippingAddress.address }</td>
+						<td>
+							<a href="${contextPath}/uc/shippingAddress/edit/${shippingAddress.id}">编辑</a>
+							<a href="${contextPath}/uc/shippingAddress/delete/${shippingAddress.id}">删除</a>
+						</td>
 					</tr>
 				</c:forEach>
 				<tr>
-					<td colspan="3">
+					<td colspan="4">
 						<a href="${contextPath}/uc/shippingAddress/add">添加收货人</a>
 					</td>
 				</tr>

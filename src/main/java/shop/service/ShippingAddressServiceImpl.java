@@ -21,4 +21,20 @@ public class ShippingAddressServiceImpl implements ShippingAddressService {
 		return shippingAddressMapper.findAll();
 	}
 
+	public void create(ShippingAddress shippingAddress) {
+		shippingAddressMapper.create(shippingAddress);
+	}
+
+	public void delete(Long id) {
+		shippingAddressMapper.delete(id);
+	}
+
+	public ShippingAddress findOne(Long id) {
+		return shippingAddressMapper.findOne(id);
+	}
+
+	public void update(ShippingAddress shippingAddress) {
+		shippingAddressMapper.update(shippingAddress);
+	}
+
 }
