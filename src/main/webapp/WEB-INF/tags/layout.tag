@@ -20,21 +20,28 @@
 		<div class="menu">
 			<ul>
 				<li><a href="${contextPath }/">[首页]</a></li>
+			
+				<c:if test="${username == 'anonymousUser' }">
+						<a href="${contextPath }/register">[注册] </a>
+						<a href="${contextPath }/login">[登录]</a>
+				</c:if>
+				<c:if test="${username != 'anonymousUser' }">
+					<li>
+						<span>${username.username } </span>
+						<ul>
+							<li><a href="${contextPath }/uc/ShoppingCart">购物车管理</a></li>
+							<li><a href="${contextPath }/uc/shippingAddress">收货人管理</a></li>
+							<li><a href="${contextPath }/uc/order">订单管理</a></li>
+							<li>
+								<form action="${contextPath }/logout" method="post" style="display: inline-block;">
+									<sec:csrfInput/>
+									<input type="submit" value="退出" style="background-color: transparent; border: none;">
+								</form>
+							</li>
+						</ul>
+					</li>
+				</c:if>
 			</ul>
-			<c:if test="${username == 'anonymousUser' }">
-				<a href="${contextPath }/register">[注册] </a>
-				<a href="${contextPath }/login">[登录]</a>
-			</c:if>
-			<c:if test="${username != 'anonymousUser' }">
-				<span>${username.username } </span>
-				<span>上次登录时间:${username.user.dateFormat }</span>
-				<form action="${contextPath }/logout" method="post" style="display: inline-block;">
-					<sec:csrfInput/>
-					<input type="submit" value="[退出]" style="background-color: transparent; border: none;">
-				</form>
-			</c:if>
-			<a href="${contextPath }/uc/ShoppingCart">购物车</a>
-			<a href="${contextPath }/uc/shippingAddress">收货人管理</a>
 		</div>
 	</div>
 
