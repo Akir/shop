@@ -7,13 +7,14 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath }"></c:set>
 <t:layout title="Login">
 	<jsp:body>
+		<h1>Login</h1>
 		<form action="" method="post">
 			<sec:csrfInput/>
 			<c:if test="${param.error != null }">
-				<span>用户名或密码错误</span>
+				<span style="color: red">用户名或密码错误</span>
 			</c:if>
 			<c:if test="${param.logout != null }">
-				<span>账号已登出，请重新登录</span>
+				<span style="color: red">账号已登出，请重新登录</span>
 			</c:if>
 			<div>
 				<label for="username">用户名:</label>
