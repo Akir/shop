@@ -8,16 +8,19 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.session.SessionRegistryImpl;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	private AuthenticationSuccessHandler authenticationSuccessHandler;
+	private UserDetailsService userDetailsService;
 	
-	@Autowired
-	public SecurityConfig(AuthenticationSuccessHandler authenticationSuccessHandler) {
+	public SecurityConfig(AuthenticationSuccessHandler authenticationSuccessHandler,
+			UserDetailsService userDetailsService) {
 		this.authenticationSuccessHandler = authenticationSuccessHandler;
+		this.userDetailsService = userDetailsService;
 	}
 
 	@Override
@@ -41,7 +44,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.formLogin()
 				.loginPage("/login")
 				.defaultSuccessUrl("/")
-				.successHandler(authenticationSuccessHandler);
+				.successHandler(authenticationSuccessHandler)
+				
+			.and()
+			
+			.rememberMe()
+				.tokenValiditySeconds(7*24*3600)
+				.userDetailsService(userDetailsService);
 	}
 	
 	@Bean

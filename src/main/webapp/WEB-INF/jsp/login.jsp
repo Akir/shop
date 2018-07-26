@@ -25,6 +25,8 @@
 				<input type="password" name="password" id="username"/>
 			</div>
 			<div>
+				<label for="remember-me">记住我:</label>
+				<input type="checkbox" name="remember-me" id="remember-me"/>
 				<input type="submit" value="确定"/>
 			</div>
 		</form>
