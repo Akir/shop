@@ -1,6 +1,5 @@
 package shop.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -50,6 +49,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			
 			.rememberMe()
 				.tokenValiditySeconds(7*24*3600)
+				.key("q123456")
 				.userDetailsService(userDetailsService);
 	}
 	
