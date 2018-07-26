@@ -6,13 +6,13 @@ import shop.model.ShippingAddress;
 
 public interface ShippingAddressService {
 
-	List<ShippingAddress> findAll();
+	List<ShippingAddress> findAll(long userid);
 
 	void create(ShippingAddress shippingAddress);
 
-	void delete(Long id);
+	void delete(Long id, long userid);
 
-	ShippingAddress findOne(Long id);
+	ShippingAddress findOne(Long id, long userid);
 
 	void update(ShippingAddress shippingAddress);
 

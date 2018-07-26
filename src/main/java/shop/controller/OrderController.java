@@ -35,7 +35,7 @@ public class OrderController {
 	public String add(@ModelAttribute Order order, Model model) {
 		Username username = OrderController.getCurrentUser();
 		model.addAttribute("shoppingCart", shoppingCartService.findShoppingCart(username.getId()));
-		model.addAttribute("shippingAddress", shippingAddressService.findAll());
+		model.addAttribute("shippingAddress", shippingAddressService.findAll(username.getId()));
 		return "order-add";
 	}
 	
@@ -51,7 +51,8 @@ public class OrderController {
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/uc/order")
 	public String order(Model model) {
-		model.addAttribute("orders", orderService.findAll());
+		Username username = OrderController.getCurrentUser();
+		model.addAttribute("orders", orderService.findAll(username.getId()));
 		return "order";
 	}
 	

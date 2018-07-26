@@ -12,6 +12,7 @@
 	<select id="findAll" resultMap="Order">
 		select * from "ORDER" o
 		inner join SHIPPINGADDRESS sa on sa.SHIPPINGADDRESS_ID = o.SHIPPINGADDRESS_ID
+		where o.USERNAME_ID = #{userid}
 	</select>
 	
 	<resultMap type="shop.model.Order" id="Order">

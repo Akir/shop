@@ -26,7 +26,8 @@ public class ShippingAddressController {
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/uc/shippingAddress")
 	public String shippingAddress(Model model) {
-		model.addAttribute("shippingAddresses", shippingAddressService.findAll());
+		Username username = ShippingAddressController.getCurrentUser();
+		model.addAttribute("shippingAddresses", shippingAddressService.findAll(username.getId()));
 		return "shippingAddress";
 	}
 	
@@ -48,13 +49,15 @@ public class ShippingAddressController {
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/uc/shippingAddress/delete/{id}")
 	public String delete(@PathVariable Long id) {
-		shippingAddressService.delete(id);
+		Username username = ShippingAddressController.getCurrentUser();
+		shippingAddressService.delete(id, username.getId());
 		return "redirect:/uc/shippingAddress";
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/uc/shippingAddress/edit/{id}")
 	public String edit(@PathVariable Long id, Model model) {
-		model.addAttribute("shippingAddress", shippingAddressService.findOne(id));
+		Username username = ShippingAddressController.getCurrentUser();
+		model.addAttribute("shippingAddress", shippingAddressService.findOne(id, username.getId()));
 		return "ShippingAddress-add";
 	}
 	

@@ -8,6 +8,6 @@ public interface OrderMapper {
 
 	void create(Order order);
 
-	List<Order> findAll();
+	List<Order> findAll(long userid);
 
 }

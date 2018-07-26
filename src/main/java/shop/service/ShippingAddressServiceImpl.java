@@ -17,20 +17,20 @@ public class ShippingAddressServiceImpl implements ShippingAddressService {
 		this.shippingAddressMapper = shippingAddressMapper;
 	}
 	
-	public List<ShippingAddress> findAll() {
-		return shippingAddressMapper.findAll();
+	public List<ShippingAddress> findAll(long userid) {
+		return shippingAddressMapper.findAll(userid);
 	}
 
 	public void create(ShippingAddress shippingAddress) {
 		shippingAddressMapper.create(shippingAddress);
 	}
 
-	public void delete(Long id) {
-		shippingAddressMapper.delete(id);
+	public void delete(Long id, long userid) {
+		shippingAddressMapper.delete(id, userid);
 	}
 
-	public ShippingAddress findOne(Long id) {
-		return shippingAddressMapper.findOne(id);
+	public ShippingAddress findOne(Long id, long userid) {
+		return shippingAddressMapper.findOne(id, userid);
 	}
 
 	public void update(ShippingAddress shippingAddress) {

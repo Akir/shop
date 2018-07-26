@@ -17,4 +17,6 @@ public interface ShoppingCartMapper {
 
 	void deleteShoppingCartItem(@Param("username_id") long id, 
 						@Param("cellphone_id") long cellphone_id);
+
+	void deleteShoppingCart(long id);
 }

@@ -26,7 +26,7 @@
 			</div>
 			<div>
 				<label for="remember-me">记住我:</label>
-				<input type="checkbox" name="remember-me" id="remember-me"/>
+				<input type="checkbox" name="remember-me" id="remember-me" checked="checked"/>
 				<input type="submit" value="确定"/>
 			</div>
 		</form>

@@ -5,7 +5,7 @@
 
 <mapper namespace="shop.mapper.ShippingAddressMapper">
 	<select id="findAll" resultMap="ShippingAddress">
-		select * from SHIPPINGADDRESS
+		select * from SHIPPINGADDRESS where USERNAME_ID = #{userid}
 	</select>
 	
 	<insert id="create" useGeneratedKeys="true" keyColumn="SHIPPINGADDRESS_ID" keyProperty="id">
@@ -15,6 +15,7 @@
 	
 	<delete id="delete">
 		delete from SHIPPINGADDRESS where SHIPPINGADDRESS_ID = #{id}
+		and USERNAME_ID = #{userid}
 	</delete>
 	
 	<update id="update">
@@ -25,7 +26,7 @@
 	
 	<select id="findOne" resultMap="ShippingAddress">
 		select * from SHIPPINGADDRESS
-		where SHIPPINGADDRESS_ID = #{id}
+		where SHIPPINGADDRESS_ID = #{id} and USERNAME_ID = #{userid}
 	</select>
 	
 	<resultMap type="shop.model.ShippingAddress" id="ShippingAddress">

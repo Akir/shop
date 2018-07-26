@@ -9,6 +9,6 @@ public interface OrderService {
 
 	void create(Order order, List<ShoppingCartItem> shoppingCartItems);
 
-	List<Order> findAll();
+	List<Order> findAll(long userid);
 
 }

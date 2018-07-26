@@ -27,6 +27,10 @@
 		where USERNAME_ID = #{username_id} and CELLPHONE_ID = #{cellphone_id}
 	</delete>
 	
+	<delete id="deleteShoppingCart">
+		delete from SHOPPINGCART where USERNAME_ID = #{id}
+	</delete>
+	
 	<resultMap type="shop.model.ShoppingCartItem" id="ShoppingCartItem">
 		<id column="CELLPHONE_ID"/>
 		<result property="quantity" column="QUANTITY"/>
