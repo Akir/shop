@@ -11,4 +11,6 @@ public interface OrderService {
 
 	List<Order> findAll(long userid);
 
+	void updateAddress(Long id, Long addressid, long userid);
+
 }

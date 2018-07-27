@@ -10,6 +10,7 @@ import shop.mapper.OrderItemMapper;
 import shop.mapper.OrderMapper;
 import shop.mapper.ShoppingCartMapper;
 import shop.model.Order;
+import shop.model.OrderItem;
 import shop.model.ShoppingCartItem;
 
 @Service
@@ -36,6 +37,22 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	public List<Order> findAll(long userid) {
-		return orderMapper.findAll(userid);
+		List<Order> orders = orderMapper.findAll(userid);
+		for (Order order : orders) {
+			List<OrderItem> orderItems = orderItemMapper.findAllByOrderId(order.getId(), userid);
+			long totalAmount = 0;
+			for (OrderItem orderItem : orderItems) {
+				totalAmount += orderItem.getCellPhone().getPrice() * orderItem.getQuantity();
+			}
+			order.setTotalAmount(totalAmount);
+			order.setOrderItems(orderItems);
+		}
+		return orders;
+	}
+
+	public void updateAddress(Long id, Long addressid, long userid) {
+		if(addressid != null) {
+			orderMapper.updateAddress(id, addressid, userid);
+		}
 	}
 }

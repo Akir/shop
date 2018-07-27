@@ -13,7 +13,13 @@
 		select * from "ORDER" o
 		inner join SHIPPINGADDRESS sa on sa.SHIPPINGADDRESS_ID = o.SHIPPINGADDRESS_ID
 		where o.USERNAME_ID = #{userid}
+		order by ORDER_ID
 	</select>
+	
+	<update id="updateAddress">
+		update "ORDER" set SHIPPINGADDRESS_ID = #{addressid}
+		where ORDER_ID = #{id} and USERNAME_ID = #{userid}
+	</update>
 	
 	<resultMap type="shop.model.Order" id="Order">
 		<id column="ORDER_ID" property="id"/>

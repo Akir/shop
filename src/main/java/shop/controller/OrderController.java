@@ -6,8 +6,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import shop.config.UserDetailsImpl;
 import shop.model.Order;
@@ -54,6 +56,20 @@ public class OrderController {
 		Username username = OrderController.getCurrentUser();
 		model.addAttribute("orders", orderService.findAll(username.getId()));
 		return "order";
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "/uc/order/address/{id}")
+	public String getAddress(Model model) {
+		Username username = OrderController.getCurrentUser();
+		model.addAttribute("shippingAddresses", shippingAddressService.findAll(username.getId()));
+		return "order-address";
+	}
+	
+	@RequestMapping(method = RequestMethod.POST, value = "/uc/order/address/{id}")
+	public String updateAddress(@PathVariable Long id, @RequestParam Long addressId) {
+		Username username = OrderController.getCurrentUser();
+		orderService.updateAddress(id, addressId, username.getId());
+		return "redirect:/uc/order";
 	}
 	
 	private static Username getCurrentUser() {

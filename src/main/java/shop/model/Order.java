@@ -1,12 +1,27 @@
 package shop.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class Order {
 	private Long id;
 	private Username username;
 	private ShippingAddress shippingAddress;
 	private Date date;
+	private List<OrderItem> orderItems;
+	private Long totalAmount;
+	public Long getTotalAmount() {
+		return totalAmount;
+	}
+	public void setTotalAmount(Long totalAmount) {
+		this.totalAmount = totalAmount;
+	}
+	public List<OrderItem> getOrderItems() {
+		return orderItems;
+	}
+	public void setOrderItems(List<OrderItem> orderItems) {
+		this.orderItems = orderItems;
+	}
 	public Long getId() {
 		return id;
 	}
