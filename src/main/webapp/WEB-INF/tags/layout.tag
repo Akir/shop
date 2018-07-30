@@ -4,6 +4,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ attribute name="title" required="true"%>
 <%@ attribute name="css" fragment="true" %>
+<%@ attribute name="js" fragment="true" %>
 <sec:authentication property="principal" var="username"/>
 <c:set var="contextPath" value="${pageContext.request.contextPath }"></c:set>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -50,5 +51,6 @@
 	</div>
 
 	<div class="footer">copyright 2018</div>
+	<jsp:invoke fragment="js" />
 </body>
 </html>

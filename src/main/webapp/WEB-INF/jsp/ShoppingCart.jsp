@@ -4,11 +4,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath }"></c:set>
 
 <t:layout title="Shopping Cart">
 	<jsp:attribute name="css">
+		<sec:csrfMetaTags/>
 		<link href="${contextPath }/assets/css/table.css" rel="stylesheet">
+	</jsp:attribute>
+	<jsp:attribute name="js">
+		<script type="text/javascript" src="${contextPath }/assets/vendor/jquery-3.3.1.min.js"></script>
+		<script type="text/javascript" src="${contextPath }/assets/js/shoppingCart.js"></script>
 	</jsp:attribute>
 	<jsp:body>
 		<h1>Shopping Cart</h1>
@@ -23,23 +29,19 @@
 					<th>选项</th>
 				</tr>
 				<c:forEach items="${shoppingCart.shoppingCartItems }" var="shoppingCartItem">
-					<tr>
+					<tr class="${shoppingCartItem.cellPhone.id }">
 						<td>${shoppingCartItem.cellPhone.model }</td>
 						<td>${shoppingCartItem.cellPhone.price/100 }</td>
-						<td>${shoppingCartItem.quantity }</td>
+						<td id="${shoppingCartItem.cellPhone.id }">${shoppingCartItem.quantity }</td>
 						<td>
-							<form action="" method="post">
-								<sec:csrfInput/>
-								<input hidden="hidden" name="quantity" value="${shoppingCartItem.quantity }">
-								<button name="operate" value="${shoppingCartItem.cellPhone.id }:1">减少</button>
-								<button name="operate" value="${shoppingCartItem.cellPhone.id }:2">增加</button>
-								<button name="operate" value="${shoppingCartItem.cellPhone.id }:3">删除</button>
-							</form>
+							<button name="operate" value="${shoppingCartItem.cellPhone.id }:1" data-quantity="${shoppingCartItem.quantity }">减少</button>
+							<button name="operate" value="${shoppingCartItem.cellPhone.id }:2" data-quantity="${shoppingCartItem.quantity }">增加</button>
+							<button name="operate" value="${shoppingCartItem.cellPhone.id }:3" data-quantity="${shoppingCartItem.quantity }">删除</button>
 						</td>
 					</tr>
 				</c:forEach>
 				<tr>
-					<td colspan="3">总计:${shoppingCart.totalAmount/100 }</td>
+					<td colspan="3" id="totalAmount">总计:<fmt:formatNumber value="${shoppingCart.totalAmount/100}" pattern="0.00"/></td>
 					<td>
 						<form action="${contextPath}/uc/order/add" method="get">
 							<button>结算</button>
@@ -47,7 +49,6 @@
 					</td>
 				</tr>
 			</c:if>
-			
 		</table>
 	</jsp:body>
 </t:layout>

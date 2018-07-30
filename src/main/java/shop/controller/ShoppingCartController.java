@@ -7,9 +7,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
 
 import shop.config.UserDetailsImpl;
+import shop.model.ShoppingCart;
 import shop.model.Username;
 import shop.service.ShoppingCartService;
 import shop.service.UsernameService;
@@ -39,12 +41,13 @@ public class ShoppingCartController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, value = "/uc/ShoppingCart")
-	public String operateShoppingCart(@RequestParam("operate") String operate, 
+	@ResponseBody
+	public ShoppingCart operateShoppingCart(@RequestParam("operate") String operate, 
 										@RequestParam("quantity") int quantity) {
 		Username username = ShoppingCartController.getCurrentUser();
 		System.out.println(operate);
 		shoppingCartService.operateShoppingCart(operate, username.getId(), quantity);
-		return "redirect:/uc/ShoppingCart";
+		return shoppingCartService.findShoppingCart(username.getId());
 	}
 
 	private static Username getCurrentUser() {
