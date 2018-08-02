@@ -21,6 +21,12 @@
 		where ORDER_ID = #{id} and USERNAME_ID = #{userid}
 	</update>
 	
+	<select id="findOne" resultMap="Order">
+		select * from "ORDER" o
+		inner join SHIPPINGADDRESS sa on sa.SHIPPINGADDRESS_ID = o.SHIPPINGADDRESS_ID
+		where o.USERNAME_ID = #{userid} and o.ORDER_ID = #{id}
+	</select>
+	
 	<resultMap type="shop.model.Order" id="Order">
 		<id column="ORDER_ID" property="id"/>
 		<result column="ORDER_TIME" property="date"/>

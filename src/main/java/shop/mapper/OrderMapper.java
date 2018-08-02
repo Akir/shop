@@ -16,4 +16,6 @@ public interface OrderMapper {
 						@Param("addressid") Long addressid, 
 						@Param("userid") long userid);
 
+	Order findOne(@Param("id") Long id, 
+					@Param("userid") long userid);
 }

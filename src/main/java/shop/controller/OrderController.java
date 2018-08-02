@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import shop.config.UserDetailsImpl;
 import shop.model.Order;
@@ -70,6 +71,13 @@ public class OrderController {
 		Username username = OrderController.getCurrentUser();
 		orderService.updateAddress(id, addressId, username.getId());
 		return "redirect:/uc/order";
+	}
+	
+	@RequestMapping(method = RequestMethod.POST, value = "/uc/order/{id}/pay", produces = "text/html;charset=UTF-8")
+	@ResponseBody
+	public String pay(@PathVariable Long id) {
+		Username username = OrderController.getCurrentUser();
+		return orderService.payForm(id, username.getId());
 	}
 	
 	private static Username getCurrentUser() {

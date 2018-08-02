@@ -13,4 +13,8 @@ public interface OrderService {
 
 	void updateAddress(Long id, Long addressid, long userid);
 
+	String payForm(Long id, long userid);
+	
+	Order findOne(Long id, long userid);
+
 }

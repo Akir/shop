@@ -47,7 +47,13 @@
 				</c:forEach>
 				<tr>
 					<td></td>
-					<td colspan="4">总金额: ${order.totalAmount/100}</td>
+					<td colspan="3">总金额: ${order.totalAmount/100}</td>
+					<td>
+						<form action="${contextPath}/uc/order/${order.id}/pay" method="post">
+							<sec:csrfInput/>
+							<button>付款</button>	
+						</form>
+					</td>
 				</tr>
 			</c:forEach>
 		</table>
