@@ -1,16 +1,21 @@
 package shop.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayClient;
+import com.alipay.api.internal.util.AlipaySignature;
 import com.alipay.api.request.AlipayTradePagePayRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -20,6 +25,7 @@ import shop.mapper.ShoppingCartMapper;
 import shop.model.Order;
 import shop.model.OrderItem;
 import shop.model.ShoppingCartItem;
+import shop.service.exception.AlipaySignatureException;
 
 @Service
 @Transactional
@@ -31,10 +37,11 @@ public class OrderServiceImpl implements OrderService {
 	private String alipayReturnUrl;
     private String alipayNotifyUrl;
     private ObjectMapper objectMapper;
+    private String alipayPublicKey;
 
 	public OrderServiceImpl(OrderMapper orderMapper, OrderItemMapper orderItemMapper,
 			ShoppingCartMapper shoppingCartMapper, AlipayClient alipayClient,
-			Environment en, ObjectMapper objectMapper) {
+			Environment en, ObjectMapper objectMapper) throws IOException {
 		this.orderMapper = orderMapper;
 		this.orderItemMapper = orderItemMapper;
 		this.shoppingCartMapper = shoppingCartMapper;
@@ -42,6 +49,7 @@ public class OrderServiceImpl implements OrderService {
 		this.alipayReturnUrl = en.getProperty("alipay.returnUrl");
 		this.alipayNotifyUrl = en.getProperty("alipay.notifyUrl");
 		this.objectMapper = objectMapper;
+		this.alipayPublicKey = FileUtils.readFileToString(new File(en.getProperty("alipay.alipayPublicKeyFile")), "utf-8");
 	}
 
 	public void create(Order order, List<ShoppingCartItem> shoppingCartItems) {
@@ -101,5 +109,16 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public Order findOne(Long id, long userid) {
 		return orderMapper.findOne(id, userid);
+	}
+
+	@Override
+	public void verifySignature(Map<String, String> paramMap) {
+		try {
+			if(!AlipaySignature.rsaCheckV1(paramMap, alipayPublicKey, "utf-8", "RSA2")) {
+				throw new AlipaySignatureException();
+			}
+		} catch (AlipayApiException e) {
+			throw new AlipaySignatureException(e);
+		}
 	}
 }

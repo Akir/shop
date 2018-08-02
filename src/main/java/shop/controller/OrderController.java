@@ -1,6 +1,7 @@
 package shop.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -78,6 +79,12 @@ public class OrderController {
 	public String pay(@PathVariable Long id) {
 		Username username = OrderController.getCurrentUser();
 		return orderService.payForm(id, username.getId());
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "/uc/order/sync-pay-cb")
+	public String payOk(@RequestParam Map<String, String> paramMap) {
+		orderService.verifySignature(paramMap);
+		return "pay-ok";
 	}
 	
 	private static Username getCurrentUser() {

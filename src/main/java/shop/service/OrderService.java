@@ -1,6 +1,7 @@
 package shop.service;
 
 import java.util.List;
+import java.util.Map;
 
 import shop.model.Order;
 import shop.model.ShoppingCartItem;
@@ -16,5 +17,7 @@ public interface OrderService {
 	String payForm(Long id, long userid);
 	
 	Order findOne(Long id, long userid);
+
+	void verifySignature(Map<String, String> paramMap);
 
 }
