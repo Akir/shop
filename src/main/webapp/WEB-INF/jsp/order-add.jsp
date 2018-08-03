@@ -28,14 +28,19 @@
 				<td colspan="3">总计:${shoppingCart.totalAmount/100 }</td>
 			</tr>
 		</table>
-		<form:form action="" method="post" commandName="order">
-			<sec:csrfInput/>
-			<input hidden="hidden" name="shoppingCart" value="${shoppingCart }">
-			<form:select path="shippingAddress.id" items="${shippingAddress }" 
-								itemLabel="address" 
-								itemValue="id">
-			</form:select>
-			<div><button>确认购买</button></div>
-		</form:form>
+		<c:if test="${shippingAddress[0] != null }">
+			<form:form action="" method="post" commandName="order">
+				<sec:csrfInput/>
+				<input hidden="hidden" name="shoppingCart" value="${shoppingCart }">
+				<form:select path="shippingAddress.id" items="${shippingAddress }" 
+									itemLabel="address" 
+									itemValue="id">
+				</form:select>
+				<div><button>确认购买</button></div>
+			</form:form>
+		</c:if>
+		<c:if test="${shippingAddress[0] == null}">
+			<span>你好像还没有收货人，<a href="${contextPath}/uc/shippingAddress/add">新建收货人</a></span>
+		</c:if>
 	</jsp:body>
 </t:layout>
